@@ -96,9 +96,10 @@ public class CluckSquadPanel extends PluginPanel
             card.add(new JLabel(text), BorderLayout.CENTER);
 
             JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 3, 2));
-            JButton join = new JButton(event == events.get(0) && config.attending() ? "✓ Joined" : "Join");
+            JButton join = new JButton(event.joined ? "✓ Joined" : "Join");
             join.addActionListener(e ->
             {
+                event.joined = true;
                 if (event == events.get(0))
                 {
                     configManager.setConfiguration("clucksquad", "attending", true);
@@ -110,6 +111,7 @@ public class CluckSquadPanel extends PluginPanel
             JButton leave = new JButton("Leave");
             leave.addActionListener(e ->
             {
+                event.joined = false;
                 if (event == events.get(0))
                 {
                     configManager.setConfiguration("clucksquad", "attending", false);
@@ -295,6 +297,7 @@ public class CluckSquadPanel extends PluginPanel
         private final String boss;
         private final String time;
         private final String details;
+        private boolean joined;
 
         private DemoEvent(String name, String type, String boss, String time, String details)
         {
@@ -303,6 +306,7 @@ public class CluckSquadPanel extends PluginPanel
             this.boss = boss;
             this.time = time;
             this.details = details;
+            this.joined = false;
         }
     }
 }

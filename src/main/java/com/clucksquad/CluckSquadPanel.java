@@ -1,15 +1,13 @@
 package com.clucksquad;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import net.runelite.client.ui.PluginPanel;
-import net.runelite.client.ui.components.LineComponent;
-
-import java.awt.GridLayout;
 
 public class CluckSquadPanel extends PluginPanel
 {

@@ -126,8 +126,7 @@ public class CluckSquadPlugin extends Plugin
 
         // Black outline
         g.setColor(new Color(35, 35, 35));
-        g.setStyle(java.awt.BasicStroke.CAP_ROUND);
-        g.setStroke(new BasicStroke(2f));
+        g.setStroke(new BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g.drawOval(5, 9, 21, 17);
         g.drawOval(14, 4, 13, 13);
 

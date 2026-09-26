@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,18 +38,7 @@ public class CluckSquadPanel extends PluginPanel
 
     private void seedEvents()
     {
-        if (!events.isEmpty())
-        {
-            return;
-        }
-
-        events.add(new DemoEvent(
-            config.nextEvent(),
-            config.eventType(),
-            config.eventBoss(),
-            config.eventTime(),
-            config.eventDetails()
-        ));
+        events.add(new DemoEvent(config.nextEvent(), config.eventType(), config.eventBoss(), config.eventTime(), config.eventDetails()));
         events.add(new DemoEvent("Bandos God Wars", "Bossing", "General Graardor", "11:00 PM BST", "Cluck Squad bossing night"));
         events.add(new DemoEvent("Huey Training Night", "Training", "Hueycoatl", "9:00 PM BST", "Learn the mechanics together"));
     }
@@ -73,7 +62,6 @@ public class CluckSquadPanel extends PluginPanel
 
         root.add(tabs, BorderLayout.CENTER);
         add(root);
-
         revalidate();
         repaint();
     }
@@ -98,10 +86,10 @@ public class CluckSquadPanel extends PluginPanel
                 "<b>Boss / Activity:</b> " + event.boss + "<br>" +
                 "<b>Time:</b> " + event.time + "<br>" +
                 "<b>Details:</b> " + event.details + "</html>";
-
             card.add(new JLabel(text), BorderLayout.CENTER);
 
             JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 3, 2));
+
             JButton join = new JButton(event.joined ? "✓ Joined" : "Join");
             join.addActionListener(e ->
             {
@@ -110,7 +98,6 @@ public class CluckSquadPanel extends PluginPanel
                 {
                     configManager.setConfiguration("clucksquad", "attending", true);
                 }
-                JOptionPane.showMessageDialog(this, "You're marked as attending: " + event.name);
                 rebuild();
             });
 
@@ -122,7 +109,6 @@ public class CluckSquadPanel extends PluginPanel
                 {
                     configManager.setConfiguration("clucksquad", "attending", false);
                 }
-                JOptionPane.showMessageDialog(this, "You've left: " + event.name);
                 rebuild();
             });
 
@@ -138,45 +124,21 @@ public class CluckSquadPanel extends PluginPanel
             panel.add(card);
         }
 
-        JPanel wrapper = new JPanel(new BorderLayout());
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setBorder(null);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        wrapper.add(scrollPane, BorderLayout.CENTER);
-        return wrapper;
+        return wrapScrollable(panel);
     }
 
     private JPanel createLeaderboardTab()
     {
-        JPanel panel = new JPanel(new GridLayout(0, 1, 0, 4));
+        JPanel panel = new JPanel(new GridLayout(0, 1, 0, 6));
         panel.setBorder(new EmptyBorder(8, 8, 8, 8));
-
         panel.add(new JLabel("🏆 CLUCK SQUAD LEADERBOARD"));
         panel.add(new JLabel("1. Belt Cluckle — 145 pts"));
         panel.add(new JLabel("2. Chicken Legs — 120 pts"));
         panel.add(new JLabel("3. Cluck Norris — 95 pts"));
         panel.add(new JLabel("4. Eggcellent — 80 pts"));
         panel.add(new JLabel("5. You — " + config.points() + " pts"));
-
-        JLabel note = new JLabel("<html><br>Online leaderboard will replace these demo members when the shared clan server is added.</html>");
-        panel.add(note);
-
+        panel.add(new JLabel("<html><br>Online leaderboard will replace these demo members when the shared clan server is added.</html>"));
         return wrapScrollable(panel);
-    }
-
-    private JPanel wrapScrollable(JPanel panel)
-    {
-        JPanel wrapper = new JPanel(new BorderLayout());
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setBorder(null);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        wrapper.add(scrollPane, BorderLayout.CENTER);
-        return wrapper;
-    }
-
-
     }
 
     private JPanel createStatsTab()
@@ -193,16 +155,14 @@ public class CluckSquadPanel extends PluginPanel
         JButton addAttendance = new JButton("Record Attendance");
         addAttendance.addActionListener(e ->
         {
-            int newValue = config.attendance() + 1;
-            configManager.setConfiguration("clucksquad", "attendance", newValue);
+            configManager.setConfiguration("clucksquad", "attendance", config.attendance() + 1);
             rebuild();
         });
 
         JButton addPoints = new JButton("Award 10 Points");
         addPoints.addActionListener(e ->
         {
-            int newValue = config.points() + 10;
-            configManager.setConfiguration("clucksquad", "points", newValue);
+            configManager.setConfiguration("clucksquad", "points", config.points() + 10);
             rebuild();
         });
 
@@ -217,22 +177,7 @@ public class CluckSquadPanel extends PluginPanel
         panel.add(addAttendance);
         panel.add(addPoints);
         panel.add(reset);
-
         return wrapScrollable(panel);
-    }
-
-    private JPanel wrapScrollable(JPanel panel)
-    {
-        JPanel wrapper = new JPanel(new BorderLayout());
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setBorder(null);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        wrapper.add(scrollPane, BorderLayout.CENTER);
-        return wrapper;
-    }
-
-
     }
 
     private void updateStatsLabel()
@@ -250,7 +195,6 @@ public class CluckSquadPanel extends PluginPanel
     {
         JPanel panel = new JPanel(new GridLayout(0, 1, 0, 6));
         panel.setBorder(new EmptyBorder(8, 8, 8, 8));
-
         panel.add(new JLabel("⚙ CLUCK SQUAD EVENT ADMIN"));
         panel.add(new JLabel("Local demo controls — shared admin tools come with the online server."));
 
@@ -269,7 +213,6 @@ public class CluckSquadPanel extends PluginPanel
 
         panel.add(create);
         panel.add(complete);
-
         return wrapScrollable(panel);
     }
 
@@ -282,9 +225,6 @@ public class CluckSquadPanel extends PluginPanel
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         wrapper.add(scrollPane, BorderLayout.CENTER);
         return wrapper;
-    }
-
-
     }
 
     private void createEvent()
@@ -307,8 +247,7 @@ public class CluckSquadPanel extends PluginPanel
         form.add(new JLabel("Details"));
         form.add(details);
 
-        int result = JOptionPane.showConfirmDialog(
-            this, form, "Create Cluck Squad Event", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(this, form, "Create Cluck Squad Event", JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION && !name.getText().trim().isEmpty())
         {
@@ -332,10 +271,7 @@ public class CluckSquadPanel extends PluginPanel
             configManager.setConfiguration("clucksquad", "attending", false);
         }
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Event completed: " + event.name + "\nDemo reward: +1 attendance, +10 points."
-        );
+        JOptionPane.showMessageDialog(this, "Event completed: " + event.name + "\nDemo reward: +1 attendance, +10 points.");
         rebuild();
     }
 
@@ -361,7 +297,6 @@ public class CluckSquadPanel extends PluginPanel
             this.boss = boss;
             this.time = time;
             this.details = details;
-            this.joined = false;
         }
     }
 }

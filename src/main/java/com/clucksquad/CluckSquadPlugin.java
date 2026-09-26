@@ -11,6 +11,7 @@ import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.ui.overlay.OverlayManager;
 
 @PluginDescriptor(
     name = "Cluck Squad Events",
@@ -22,19 +23,25 @@ public class CluckSquadPlugin extends Plugin
     @Inject private Client client;
     @Inject private CluckSquadConfig config;
     @Inject private CluckSquadOverlay overlay;
+    @Inject private OverlayManager overlayManager;
+
     private boolean loginMessageShown;
 
     @Override
     protected void startUp()
     {
         loginMessageShown = false;
-        overlay.setEnabled(config.showOverlay());
+
+        if (config.showOverlay())
+        {
+            overlayManager.add(overlay);
+        }
     }
 
     @Override
     protected void shutDown()
     {
-        overlay.setEnabled(false);
+        overlayManager.remove(overlay);
     }
 
     @Subscribe

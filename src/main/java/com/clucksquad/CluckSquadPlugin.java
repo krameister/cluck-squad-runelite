@@ -47,7 +47,7 @@ public class CluckSquadPlugin extends Plugin
             overlayManager.add(overlay);
         }
 
-        panel = new CluckSquadPanel(config);
+        panel = new CluckSquadPanel(config, client.getConfigManager());
 
         BufferedImage icon = createIcon();
 

@@ -1,33 +1,43 @@
-# 🐔 Cluck Squad Event Tracker
+# 🐔 Cluck Squad Events
 
-A RuneLite plugin for the Cluck Squad OSRS clan.
+A RuneLite external plugin for the Cluck Squad OSRS clan.
 
-## Current build
+## Current features
 
-- Upcoming event name
-- Event type
-- Boss / activity
-- Event time and details
-- Login reminder in chat
-- On-screen event overlay
+- Upcoming clan event display
+- Event type, boss/activity, time and details
+- Join / leave event controls
+- Local event creation for testing
+- Event completion testing
 - Personal attendance count
 - Personal event points
-- Personal "I'm attending" flag
+- Personal attendance status
+- Clan-style leaderboard demo
+- Login reminder
+- Optional on-screen event overlay
+- RuneLite sidebar panel with Events, Leaderboard, My Stats and Admin tabs
 
-## Planned shared-clan features
+## Privacy and networking
 
-The next stage is a shared online service so the whole clan can see and update the same events, attendance and points:
+This version is **local-only**. It does not connect to a Cluck Squad server, Discord, or any other third-party service, and it does not transmit player information over HTTP.
 
-- Live clan event list
-- Shared "I'm attending" sign-ups
-- Staff event controls
-- Clan attendance history
-- Clan leaderboard
-- Event points and rewards
-- Discord announcements/integration
+The event, attendance and points data in this prototype is stored locally through RuneLite configuration and demo state. Shared clan functionality is intentionally not included in this build.
 
-The local RuneLite build is deliberately separated from the shared service so the plugin does not store or transmit clan data until a server is configured.
+## Future development
+
+Possible future work will be considered separately and must remain compatible with RuneLite's Plugin Hub rules:
+
+- Shared clan event management
+- Staff attendance confirmation
+- Shared leaderboard
+- Discord integration
+
+No third-party network service is required for the current plugin.
 
 ## Development
 
-This project follows the RuneLite external plugin structure and targets Java 11.
+- Java 11
+- RuneLite external plugin structure
+- BSD 2-Clause License
+
+For support or bug reports, use the GitHub Issues page.

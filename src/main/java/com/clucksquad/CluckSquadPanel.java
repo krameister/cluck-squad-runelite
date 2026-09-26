@@ -162,7 +162,21 @@ public class CluckSquadPanel extends PluginPanel
         JLabel note = new JLabel("<html><br>Online leaderboard will replace these demo members when the shared clan server is added.</html>");
         panel.add(note);
 
-        return panel;
+        return wrapScrollable(panel);
+    }
+
+    private JPanel wrapScrollable(JPanel panel)
+    {
+        JPanel wrapper = new JPanel(new BorderLayout());
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setBorder(null);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        wrapper.add(scrollPane, BorderLayout.CENTER);
+        return wrapper;
+    }
+
+
     }
 
     private JPanel createStatsTab()
@@ -204,7 +218,21 @@ public class CluckSquadPanel extends PluginPanel
         panel.add(addPoints);
         panel.add(reset);
 
-        return panel;
+        return wrapScrollable(panel);
+    }
+
+    private JPanel wrapScrollable(JPanel panel)
+    {
+        JPanel wrapper = new JPanel(new BorderLayout());
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setBorder(null);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        wrapper.add(scrollPane, BorderLayout.CENTER);
+        return wrapper;
+    }
+
+
     }
 
     private void updateStatsLabel()
@@ -242,7 +270,21 @@ public class CluckSquadPanel extends PluginPanel
         panel.add(create);
         panel.add(complete);
 
-        return panel;
+        return wrapScrollable(panel);
+    }
+
+    private JPanel wrapScrollable(JPanel panel)
+    {
+        JPanel wrapper = new JPanel(new BorderLayout());
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setBorder(null);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        wrapper.add(scrollPane, BorderLayout.CENTER);
+        return wrapper;
+    }
+
+
     }
 
     private void createEvent()

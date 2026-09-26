@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import javax.swing.BoxLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -78,12 +79,14 @@ public class CluckSquadPanel extends PluginPanel
 
     private JPanel createEventsTab()
     {
-        JPanel panel = new JPanel(new GridLayout(0, 1, 0, 8));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(new EmptyBorder(8, 2, 8, 2));
 
         for (DemoEvent event : events)
         {
             JPanel card = new JPanel(new BorderLayout(4, 4));
+            card.setAlignmentX(JPanel.LEFT_ALIGNMENT);
             card.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEtchedBorder(),
                 new EmptyBorder(6, 6, 6, 6)
@@ -130,6 +133,7 @@ public class CluckSquadPanel extends PluginPanel
             buttons.add(complete);
             card.add(buttons, BorderLayout.SOUTH);
 
+            card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 125));
             panel.add(card);
         }
 

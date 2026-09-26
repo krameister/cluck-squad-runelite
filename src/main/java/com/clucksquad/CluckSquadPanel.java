@@ -133,7 +133,7 @@ public class CluckSquadPanel extends PluginPanel
             buttons.add(complete);
             card.add(buttons, BorderLayout.SOUTH);
 
-            card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 125));
+            card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 155));
             panel.add(card);
         }
 

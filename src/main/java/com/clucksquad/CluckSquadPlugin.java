@@ -32,6 +32,7 @@ public class CluckSquadPlugin extends Plugin
     @Inject private CluckSquadOverlay overlay;
     @Inject private OverlayManager overlayManager;
     @Inject private ClientToolbar clientToolbar;
+    @Inject private ConfigManager configManager;
 
     private boolean loginMessageShown;
     private CluckSquadPanel panel;
@@ -47,7 +48,7 @@ public class CluckSquadPlugin extends Plugin
             overlayManager.add(overlay);
         }
 
-        panel = new CluckSquadPanel(config, client.getConfigManager());
+        panel = new CluckSquadPanel(config, configManager);
 
         BufferedImage icon = createIcon();
 

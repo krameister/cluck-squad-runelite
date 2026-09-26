@@ -90,8 +90,10 @@ public class CluckSquadPanel extends PluginPanel
             ));
 
             String text = "<html><b>" + event.name + "</b><br>" +
-                event.type + " • " + event.boss + "<br>" +
-                event.time + "<br>" + event.details + "</html>";
+                "<b>Type:</b> " + event.type + "<br>" +
+                "<b>Boss / Activity:</b> " + event.boss + "<br>" +
+                "<b>Time:</b> " + event.time + "<br>" +
+                "<b>Details:</b> " + event.details + "</html>";
 
             card.add(new JLabel(text), BorderLayout.CENTER);
 

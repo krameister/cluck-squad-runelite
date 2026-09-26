@@ -19,22 +19,16 @@ import net.runelite.client.plugins.PluginDescriptor;
 )
 public class CluckSquadPlugin extends Plugin
 {
-    @Inject
-    private Client client;
-
-    @Inject
-    private CluckSquadConfig config;
-
-    @Inject
-    private CluckSquadOverlay overlay;
+    @Inject private Client client;
+    @Inject private CluckSquadConfig config;
+    @Inject private CluckSquadOverlay overlay;
+    private boolean loginMessageShown;
 
     @Override
     protected void startUp()
     {
-        if (config.showOverlay())
-        {
-            overlay.setEnabled(true);
-        }
+        loginMessageShown = false;
+        overlay.setEnabled(config.showOverlay());
     }
 
     @Override
@@ -46,16 +40,24 @@ public class CluckSquadPlugin extends Plugin
     @Subscribe
     public void onGameStateChanged(GameStateChanged event)
     {
-        if (event.getGameState() == GameState.LOGGED_IN)
+        if (event.getGameState() != GameState.LOGGED_IN)
         {
+            loginMessageShown = false;
+            return;
+        }
+
+        if (!loginMessageShown && config.showLoginMessage())
+        {
+            loginMessageShown = true;
             String eventName = config.nextEvent();
 
             if (eventName != null && !eventName.trim().isEmpty() && !eventName.equalsIgnoreCase("No event set"))
             {
+                String attendance = config.attending() ? " — You're marked as attending" : "";
                 client.addChatMessage(
                     ChatMessageType.GAMEMESSAGE,
                     "",
-                    "🐔 Cluck Squad: Next event — " + eventName + " (" + config.eventTime() + ")",
+                    "🐔 Cluck Squad: " + eventName + " — " + config.eventTime() + attendance,
                     null
                 );
             }

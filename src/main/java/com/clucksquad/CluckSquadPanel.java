@@ -12,10 +12,12 @@ import net.runelite.client.ui.PluginPanel;
 public class CluckSquadPanel extends PluginPanel
 {
     private final CluckSquadConfig config;
+    private final net.runelite.client.config.ConfigManager configManager;
 
-    public CluckSquadPanel(CluckSquadConfig config)
+    public CluckSquadPanel(CluckSquadConfig config, net.runelite.client.config.ConfigManager configManager)
     {
         this.config = config;
+        this.configManager = configManager;
         rebuild();
     }
 

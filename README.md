@@ -1,28 +1,33 @@
-# Cluck Squad Events 🐔
+# 🐔 Cluck Squad Event Tracker
 
 A RuneLite plugin for the Cluck Squad OSRS clan.
 
-## Version 1
+## Current build
 
-The first version provides:
-
-- Next-event reminder when logging into RuneLite
+- Upcoming event name
+- Event type
+- Boss / activity
+- Event time and details
+- Login reminder in chat
 - On-screen event overlay
-- Configurable event name and time
-- Event details field
-- Personal attendance counter
+- Personal attendance count
 - Personal event points
+- Personal "I'm attending" flag
 
-## Planned features
+## Planned shared-clan features
 
-- Shared clan events
-- Automatic attendance tracking where RuneLite can reliably detect participation
+The next stage is a shared online service so the whole clan can see and update the same events, attendance and points:
+
+- Live clan event list
+- Shared "I'm attending" sign-ups
+- Staff event controls
+- Clan attendance history
 - Clan leaderboard
-- Event history
-- Bossing event support
-- Discord event synchronisation
-- Staff/admin event management
+- Event points and rewards
+- Discord announcements/integration
+
+The local RuneLite build is deliberately separated from the shared service so the plugin does not store or transmit clan data until a server is configured.
 
 ## Development
 
-This project follows the RuneLite external plugin structure. See the RuneLite plugin documentation for development and Plugin Hub submission requirements.
+This project follows the RuneLite external plugin structure and targets Java 11.

@@ -1,6 +1,7 @@
 package com.clucksquad;
 
 import com.google.inject.Provides;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -113,22 +114,56 @@ public class CluckSquadPlugin extends Plugin
     private BufferedImage createIcon()
     {
         BufferedImage image = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D graphics = image.createGraphics();
+        Graphics2D g = image.createGraphics();
+        g.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
 
-        graphics.setColor(new Color(255, 204, 0));
-        graphics.fillOval(5, 7, 22, 20);
+        // White chicken body
+        g.setColor(Color.WHITE);
+        g.fillOval(5, 9, 21, 17);
 
-        graphics.setColor(Color.WHITE);
-        graphics.fillOval(10, 10, 6, 6);
+        // Head
+        g.fillOval(14, 4, 13, 13);
 
-        graphics.setColor(Color.BLACK);
-        graphics.fillOval(12, 12, 2, 2);
+        // Black outline
+        g.setColor(new Color(35, 35, 35));
+        g.setStyle(java.awt.BasicStroke.CAP_ROUND);
+        g.setStroke(new BasicStroke(2f));
+        g.drawOval(5, 9, 21, 17);
+        g.drawOval(14, 4, 13, 13);
 
-        graphics.setColor(new Color(220, 60, 40));
-        graphics.fillOval(22, 14, 7, 5);
-        graphics.fillOval(14, 23, 4, 5);
+        // Eye
+        g.fillOval(22, 8, 3, 3);
 
-        graphics.dispose();
+        // Beak
+        g.setColor(new Color(240, 150, 30));
+        int[] beakX = {26, 31, 26};
+        int[] beakY = {10, 13, 16};
+        g.fillPolygon(beakX, beakY, 3);
+
+        // Comb
+        g.setColor(new Color(210, 55, 45));
+        g.fillOval(17, 2, 4, 5);
+        g.fillOval(21, 1, 4, 6);
+        g.fillOval(24, 3, 4, 5);
+
+        // Wattle
+        g.fillOval(23, 14, 5, 7);
+
+        // Wing
+        g.setColor(new Color(220, 220, 220));
+        g.fillOval(8, 13, 11, 9);
+
+        // Legs
+        g.setColor(new Color(240, 150, 30));
+        g.setStroke(new BasicStroke(1.5f));
+        g.drawLine(12, 25, 12, 30);
+        g.drawLine(19, 25, 19, 30);
+        g.drawLine(12, 30, 9, 30);
+        g.drawLine(12, 30, 15, 30);
+        g.drawLine(19, 30, 16, 30);
+        g.drawLine(19, 30, 22, 30);
+
+        g.dispose();
         return image;
     }
 
